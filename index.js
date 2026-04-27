@@ -20,19 +20,17 @@ function createGrid(size) {
         square.addEventListener('mouseenter', () => {
             let opacity = Number(square.dataset.opacity);
 
-            if (!square.dataset.color) {
-                const r = Math.floor(Math.random() * 256);
-                const g = Math.floor(Math.random() * 256);
-                const b = Math.floor(Math.random() * 256);
-                square.dataset.color = `${r}, ${g}, ${b}`;
-            }
+            // generate random color
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
 
             if (opacity < 1) {
                 opacity += 0.1;
                 square.dataset.opacity = opacity;
             }
 
-            square.style.backgroundColor = `rgba(${square.dataset.color}, ${opacity})`;
+            square.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
         })
 
         container.appendChild(square)
