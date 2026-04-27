@@ -43,7 +43,7 @@ changeSizeButton.addEventListener('click', () => {
     const size = Number(prompt('Enter a grid size from 1 to 100'));
 
     if (!Number.isInteger(size) || size < 1 || size > 100) {
-        return;
+        return alert('Please input a real number');
     }
 
     currentSize = size;
