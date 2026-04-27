@@ -1,26 +1,25 @@
-// initialzie selector
+// Cache the controls and drawing container once; the rest of the script reuses them.
 const container = document.querySelector('.container')
 const changeSizeButton = document.querySelector('.change-size');
 const resetButton = document.querySelector('.reset');
 let currentSize = 16;
 
-// creates the grid
+// Rebuild the grid from scratch so size changes and resets always start clean.
 function createGrid(size) {
     container.innerHTML = '';
 
-    // loop for creating the grids 
     for (let i = 0; i < size * size; i++) {
         const square = document.createElement('div')
         square.classList.add('square');
         square.style.width = `${700 / size}px`;
         square.style.height = `${700 / size}px`;
+        // Persist darkening progress on the element because each square tracks it independently.
         square.dataset.opacity = 0;
         
-        // generate random color that eventually gets darker each time a mouse enter
+        // Each hover assigns a fresh random color and increases opacity until the square is fully opaque.
         square.addEventListener('mouseenter', () => {
             let opacity = Number(square.dataset.opacity);
 
-            // generate random color
             const r = Math.floor(Math.random() * 256);
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
@@ -38,7 +37,7 @@ function createGrid(size) {
 }
 createGrid(currentSize);
 
-// change the size
+// Prompt for a new grid size, validate it, then rebuild the board with that dimension.
 changeSizeButton.addEventListener('click', () => {
     const size = Number(prompt('Enter a grid size from 1 to 100'));
 
